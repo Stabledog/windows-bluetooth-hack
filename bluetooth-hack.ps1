@@ -1,16 +1,18 @@
 # "Disable-PnpDevice" and "Enable-PnpDevice" commands require admin rights
 #Requires -RunAsAdministrator
+# Original source: https://stackoverflow.com/a/71539568/237059
 
 # Substitute it with the name of your audio device.
 # The audio device you are trying to connect to should be paired.
-$headphonesName = "WH-1000XM3"
+$headphonesName = "PX7 Bowers & Wilkins"
 
 $bluetoothDevices = Get-PnpDevice -class Bluetooth
 
 # My headphones are recognized as 3 devices:
-# * WH-1000XM3
-# * WH-1000XM3 Avrcp Transport
-# * WH-1000XM3 Avrcp Transport
+# * PX7 Bowers & Wilkins
+# * PX7 Bowers & Wilkins Avrcp Transport
+# * PX7 Bowers & Wilkins Avrcp Transport
+# *
 # It is not enough to toggle only 1 of them. We need to toggle all of them.
 $headphonePnpDevices = $bluetoothDevices | Where-Object { $_.Name.StartsWith("$headphonesName") }
 
